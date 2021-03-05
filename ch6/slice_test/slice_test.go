@@ -35,11 +35,11 @@ func TestPtr(t *testing.T) {
 	//	v = v * 2
 	//}
 	//t.Log(item)
-	//slice := make([]int, 0, 10)
-	//for i := 20; i > 0; i-- {
-	//	slice = append(slice, i)
-	//	t.Log(len(slice), cap(slice))
-	//}
+	slice := make([]int, 0, 10)
+	for i := 20; i > 0; i-- {
+		slice = append(slice, i)
+		t.Log(len(slice), cap(slice))
+	}
 	//t.Log(slice)
 	//sort.Ints(slice)
 	//t.Log(slice)
@@ -57,4 +57,22 @@ func sub(str string, i int) (c1 string, c2 string) {
 	c1 = string(c[:i])
 	c2 = string(c[i:])
 	return
+}
+
+func TestSlice(t *testing.T) {
+	var s1, s2 []int
+	s1 = s2
+	s2 = append(s2, 1)
+	t.Log(s1, s2)
+}
+
+func TestSlice2(t *testing.T) {
+	s1, s2 := []int{1, 2, 3}, []int{3}
+	t.Logf("%p,%p", &s1, &s2)
+	s1 = s2
+	t.Logf("%p,%p", &s1, &s2)
+	s2[0] = 2
+	t.Log(s1, s2)
+	s2 = append(s2, 2)
+	t.Logf("%p,%p", &s1, &s2)
 }

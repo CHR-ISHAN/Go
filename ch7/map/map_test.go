@@ -1,6 +1,7 @@
 package _map
 
 import (
+	"fmt"
 	"sort"
 	"testing"
 )
@@ -35,20 +36,20 @@ func TestTravelMap(t *testing.T) {
 	}
 }
 
-func TestMap(t *testing.T) {
-	var mapList map[string]int
-	var mapAss map[string]int
-	mapList = map[string]int{"one": 1}
-	var mapTest map[string]string
-	mapCreated := make(map[string]float32)
-	mapCreated["key1"] = 4.5
-	mapCreated["key2"] = 4.5
-	mapCreated["key4"] = 4.5
-	v, Is := mapTest["key5"]
-	t.Log(v, Is)
-	mapAss = mapList
-	t.Log(mapAss, mapCreated, mapList)
-}
+//func TestMap(t *testing.T) {
+//	var mapList map[string]int
+//	var mapAss map[string]int
+//	mapList = map[string]int{"one": 1}
+//	var mapTest map[string]string
+//	mapCreated := make(map[string]float32)
+//	mapCreated["key1"] = 4.5
+//	mapCreated["key2"] = 4.5
+//	mapCreated["key4"] = 4.5
+//	v, Is := mapTest["key5"]
+//	t.Log(v, Is)
+//	mapAss = mapList
+//	t.Log(mapAss, mapCreated, mapList)
+//}
 
 func TestWeek(t *testing.T) {
 	week := map[int]string{1: "Mon", 2: "Tues", 3: "Th"}
@@ -79,4 +80,21 @@ func TestMapSort(t *testing.T) {
 	for _, k := range keys {
 		t.Logf("Key: %v, Value: %v / ", k, barVal[k])
 	}
+}
+
+func TestMap(t *testing.T) {
+	var m, n map[int32]int32
+	m = n
+	n = map[int32]int32{1: 1}
+	fmt.Println(m)
+	fmt.Println(n)
+}
+
+func TestMap1(t *testing.T) {
+	m, n := map[int32]int32{1: 2}, map[int32]int32{}
+	m = n
+	t.Log(m, n)
+	m[1] = 3
+	t.Log(m, n)
+	t.Logf("%p,%p", &m, &n)
 }

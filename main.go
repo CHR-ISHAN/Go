@@ -150,29 +150,19 @@ import (
 //
 //var a int
 
-func main() {
-	//n := 0
-	//fmt.Println("Multiply",n)
-	//reply := &n
-	//Multiply(10, 5, reply)
-	//fmt.Println("Multiply", *reply,n) // Multiply: 50
-	//x := min(1,2,3,4)
-	//fmt.Println(x)
-	//f()
-	//func1("Hello")
-	//fmt.Println(fib(3))
-	//print(10)
-	//fc()
-	//var arr = []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
-	//fmt.Println(twoSum(arr, 10))
-	//fmt.Println("%d",Tues)
-	//fmt.Println(twoSum([]int{1, 2, 3, 4}, 5))
-	//f()
-	//arr := []float64{7.0, 8.5, 9.1}
-	//fmt.Println(Sum(&arr))
-	arr := []int{1, 2, 3, 4}
-	fmt.Println(sum(arr))
+type TT float64
+
+func (t TT) String() string {
+	return fmt.Sprintln("%v", t)
 }
+
+//func main() {
+//	//var t TT
+//	//t.String()
+//	//var m runtime.MemStats
+//	//runtime.ReadMemStats(&m)
+//	//fmt.Printf("%d Kb\n", m.Alloc/1024)
+//}
 
 func f() {
 	for i := 0; i < 4; i++ {
@@ -194,4 +184,135 @@ func sum(a []int) int {
 		s = s + v
 	}
 	return s
+}
+
+type A interface {
+}
+
+type Cat struct {
+	name string
+	age  int
+}
+
+type Person struct {
+	name string
+	sex  string
+}
+
+func test1(a A) {
+
+}
+
+func test2(a interface{}) {
+
+}
+
+type Shaper interface {
+	Area() float32
+}
+
+type TopologicalGenus interface {
+	Rank() int
+}
+
+type Square struct {
+	side float32
+}
+
+func (sq *Square) Area() float32 {
+	return sq.side * sq.side
+}
+
+func (sq *Square) Rank() int {
+	return 1
+}
+
+type Rectangle struct {
+	length, width float32
+}
+
+func (r Rectangle) Area() float32 {
+	return r.length * r.width
+}
+
+func (r Rectangle) Rank() int {
+	return 2
+}
+
+func main() {
+	var a = new(ListNode)
+	showNode(a)
+}
+
+//func twoSum(nums []int, target int) []int {
+//	for i, x := range nums {
+//		for j := i + 1; j < len(nums); j++ {
+//			if x+nums[j] == target {
+//				return []int{i, j}
+//			}
+//		}
+//	}
+//	return nil
+//}
+
+func twoSum(nums []int, target int) []int {
+	hash := map[int]int{}
+	for i, x := range nums {
+		if p, ok := hash[target-x]; ok {
+			return []int{p, i}
+		}
+		hash[x] = i
+	}
+	return nil
+}
+
+type ListNode struct {
+	Val  int
+	Next *ListNode
+}
+
+func showNode(l *ListNode) {
+	for l != nil {
+		fmt.Println(l.Val)
+		l = l.Next
+	}
+}
+
+func insertNode(data int, l *ListNode) {
+	tmp := new(ListNode)
+	if tmp == nil {
+		fmt.Println("err: out of space")
+	}
+	tmp.Val = data
+	tmp.Next = l.Next
+	l.Next = tmp
+}
+
+func addTwoNumbers(l1 *ListNode, l2 *ListNode) (head *ListNode) {
+	var tail *ListNode
+	carry := 0
+	for l1 != nil || l2 != nil {
+		n1, n2 := 0, 0
+		if l1 != nil {
+			n1 = l1.Val
+			l1 = l1.Next
+		}
+		if l2 != nil {
+			n2 = l2.Val
+			l2 = l2.Next
+		}
+		sum := n1 + n2 + carry
+		sum, carry = sum%10, carry/10
+		if head == nil {
+			head = &ListNode{Val: sum}
+			tail = head
+		} else {
+			tail.Next = &ListNode{Val: sum}
+			tail = tail.Next
+		}
+	}
+	if carry > 0 {
+		tail.Next = &ListNode{Val: carry}
+	}
+	return
 }
